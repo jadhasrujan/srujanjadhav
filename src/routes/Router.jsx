@@ -1,28 +1,23 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import Loading from "../components/common/loading/Loading";
 
 const Home = lazy(() => import("../pages/Home"));
 const Main = lazy(() => import("../layouts/Main"));
 
-export const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: (
-        <Suspense fallback={<Loading />}>
-          <Main />
-        </Suspense>
-      ),
-      children: [
-        {
-          index: true,
-          element: <Home />,
-        },
-      ],
-    },
-  ],
+export const router = createHashRouter([
   {
-    basename: import.meta.env.BASE_URL,
-  }
-);
+    path: "/",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <Main />
+      </Suspense>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+    ],
+  },
+]);
