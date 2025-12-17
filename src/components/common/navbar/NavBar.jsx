@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import logo from "../../../assets/logo.png"; // Logo removed as per earlier instructions
 import { Link } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const navItems = [
   { id: 1, name: "Home", url: "introduction" },
@@ -92,13 +92,7 @@ const NavBar = ({ theme, toggleTheme }) => {
             {menu}
           </ul>
 
-          <button
-            onClick={toggleTheme}
-            className="btn btn-circle btn-ghost text-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            aria-label="Toggle Theme"
-          >
-            <FontAwesomeIcon icon={theme === "light" ? faMoon : faSun} />
-          </button>
+
 
           <p className="">
             <Link

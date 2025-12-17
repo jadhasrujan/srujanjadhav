@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { scroller } from "react-scroll";
 import Reveal from "../components/common/Reveal";
 import Introduction from "../components/introduction/Introduction";
 import Profile from "../components/profile/Profile";
@@ -11,6 +14,18 @@ import Certifications from "../components/profile/Certifications";
 import "../../index.css";
 
 const Home = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state && location.state.scrollTo) {
+      scroller.scrollTo(location.state.scrollTo, {
+        smooth: true,
+        duration: 500,
+        offset: -70, // Adjust for navbar height
+      });
+    }
+  }, [location]);
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-gray-100 transition-colors duration-300">
       {/* Animated Background */}

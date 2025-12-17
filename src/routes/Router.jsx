@@ -3,6 +3,7 @@ import { createHashRouter } from "react-router-dom";
 import Loading from "../components/common/loading/Loading";
 
 const Home = lazy(() => import("../pages/Home"));
+const MoreProjects = lazy(() => import("../pages/MoreProjects"));
 const Main = lazy(() => import("../layouts/Main"));
 
 export const router = createHashRouter([
@@ -17,6 +18,10 @@ export const router = createHashRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "more-projects",
+        element: <MoreProjects />,
       },
     ],
   },

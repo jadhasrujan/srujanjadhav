@@ -3,20 +3,66 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Roles = ({ role }) => {
   return (
     <div
-      className="p-6 bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 border border-white/20 dark:border-gray-700/50 flex flex-col items-start h-full relative overflow-hidden group"
+      className="group relative h-full"
+      style={{
+        "--role-color": role?.color || "#2563EB"
+      }}
     >
-      <div className="absolute top-0 left-0 w-1 h-full bg-picto-primary transform -translate-x-1 group-hover:translate-x-0 transition-transform duration-300"></div>
+      <div
+        className="relative h-full bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl rounded-2xl p-6 border border-white/20 dark:border-gray-700/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex flex-col justify-between overflow-hidden"
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = `0 20px 40px -15px ${role?.color}40`;
+          e.currentTarget.style.borderColor = `${role?.color}60`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = '';
+          e.currentTarget.style.borderColor = '';
+        }}
+      >
+        {/* Background Gradient Blob */}
+        <div
+          className="absolute -right-10 -top-10 w-32 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
+          style={{ backgroundColor: role?.color }}
+        />
 
-      <div className="mb-4 w-12 h-12 rounded-lg bg-white/60 dark:bg-white/10 backdrop-blur-sm flex items-center justify-center text-picto-primary text-2xl font-bold group-hover:bg-picto-primary group-hover:text-white transition-colors duration-300">
-        <FontAwesomeIcon icon={role?.icon} />
+        <div>
+          {/* Header with Icon */}
+          <div className="flex justify-between items-start mb-6">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-sm"
+              style={{
+                backgroundColor: `${role?.color}15`,
+                color: role?.color
+              }}
+            >
+              <FontAwesomeIcon icon={role?.icon} />
+            </div>
+
+            {/* Decorative Dot Grid */}
+            <div className="flex gap-1">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
+              ))}
+            </div>
+          </div>
+
+          <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 group-hover:text-[var(--role-color)] transition-colors duration-300">
+            {role?.title}
+          </h3>
+
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">
+            {role?.description}
+          </p>
+        </div>
+
+        {/* Animated Bottom Bar */}
+        <div className="mt-6 w-full bg-gray-200 dark:bg-gray-700 h-1 rounded-full overflow-hidden">
+          <div
+            className="h-full transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out"
+            style={{ backgroundColor: role?.color }}
+          />
+        </div>
       </div>
-
-      <p className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-picto-primary transition-colors duration-300">
-        {role?.title}
-      </p>
-      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-        {role?.description}
-      </p>
     </div>
   );
 };
